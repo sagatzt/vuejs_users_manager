@@ -21,11 +21,10 @@
 .navbar{
   display:inline-flex;
   .nav-brand {
-    margin-right: 80px;
   }
 }
 #nav {
-  padding: 30px;
+  padding-left: 10px;
 
   a {
     font-weight: bold;

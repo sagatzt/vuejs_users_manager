@@ -3,36 +3,42 @@ const User = require('../models/User')
 const daoUsers={}
 
 //función para guardar un usuario
-daoUsers.guardar = function guardar(body){
-    let usuario = new User(body)
-    console.log(usuario)
-    usuario.save()
+daoUsers.signup = (user)=>{
+    let newUser = new User(user)
+    newUser.save()
 }
 
 //función para listar usurios
-daoUsers.listar = function listar(){
+daoUsers.list =()=>{
     return new Promise((resolved,reject)=>{
         User.find()
-        .then(usuarios=>resolved(usuarios))
+        .then(users=>resolved(users))
         .catch(err=>reject(err))
     })    
 }
 
+//buscar usuario por e-mail
+daoUsers.findByEmail=(email)=>{
+    return new Promise((resolved) =>{
+            User.findOne({ email: email })
+            then(user => resolved(user))
+        })
+}
+
 //función para eliminar usuario
-daoUsers.eliminar = function eliminar(id){
-    console.log("Estoy en dao: ", id)
+daoUsers.delete = (id)=>{
     User.findOneAndRemove({_id:id},(data)=>{
         console.log("registro eliminado")
     })
 }
 
 //función para loguear usuarios
-daoUsers.login=function login(email,password){
+daoUsers.signin=(email,password)=>{
     return new Promise((resolved,reject)=>{
         User.findOne({email:email})
         .then(data=>{
             if(data){
-                if(data.password==password) 
+                if(data.checkPassword(password)) 
                     resolved(data) //todo correcto ;)
                 else
                     resolved(null) //el password no coincide

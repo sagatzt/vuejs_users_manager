@@ -37,8 +37,8 @@ export default {
 
     },
     setup(){
-        let nombre=ref("")
-        let apellidos=ref("")
+        let firstname=ref("")
+        let lastname=ref("")
         let email=ref("")
         let password=ref("")
         let usuarios=reactive([])
@@ -70,12 +70,11 @@ export default {
         }
 
         function enviar(){
-            console.log(nombre.value,apellidos.value)
             fetch('http://localhost:8081/api/guardar',{
                 method: 'POST',
                 body: JSON.stringify({
-                    nombre: nombre.value,
-                    apellidos: apellidos.value,
+                    firstname: firstname.value,
+                    lastname: lastname.value,
                     email: email.value,
                     password: password.value
                 }),
@@ -85,7 +84,7 @@ export default {
         }
 
         return {
-            nombre,apellidos,email,password,
+            firstname,lastname,email,password,
             enviar,
             usuarios,
             eliminar

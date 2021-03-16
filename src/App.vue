@@ -1,7 +1,8 @@
 <template>
   <div class="navbar d-flex justify-content-between">
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">Home</router-link> | 
+      <router-link to="/users">Users</router-link>
     </div>
     <div class="nav-brand">
       <LoginBox />

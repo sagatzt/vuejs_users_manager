@@ -2,8 +2,8 @@
   <div class="prueba">
       <div class="formulario">
         <h1>UsersManager</h1>
-            <div>Nombre: <input v-model="nombre"></div>
-            <div>Apellidos: <input v-model="apellidos"></div>
+            <div>Nombre: <input v-model="firstname"></div>
+            <div>Apellidos: <input v-model="lastname"></div>
             <div>Email: <input v-model="email"></div>
             <div>Password: <input v-model="password"></div>
             <button @click="enviar" class="btn btn-primary">Enviar</button>
@@ -16,8 +16,8 @@
             <a @click="eliminar(usuario._id)" class="eliminar" >
                 <i class="bi bi-person-bounding-box"></i>        
             </a> | 
-            {{usuario.nombre}} 
-            {{usuario.apellidos}} | 
+            {{usuario.firstname}} 
+            {{usuario.lastname}} | 
             {{usuario.email}} |
             <PasswordHide :password="usuario.password"/>
         </div>
@@ -29,7 +29,7 @@ import PasswordHide from '@/components/PasswordHide'
 import { ref, reactive, computed, onMounted } from 'vue'
         
 export default {
-    name:'UsersManager',
+    name:'UsersView',
     components:{
         PasswordHide
     },

@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 var session = require('express-session')
 const rtMain = require('./routers/rtMain')
+const rtUsers = require('./routers/rtUsers')
+const rtEntries = require('./routers/rtEntries')
 
 //base de datos
 const conexion = require('./mongodb')
@@ -17,6 +19,7 @@ app.use(session({
 
 //middlewares
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method')
@@ -27,6 +30,8 @@ app.use((req, res, next) => {
 
 //enrutadores
 app.use('/api',rtMain)
+app.use('/api/users',rtUsers)
+app.use('/api/entries',rtEntries)
 
 app.listen(8081,(err)=>{
     if(err) console.log("Errores: ", err)

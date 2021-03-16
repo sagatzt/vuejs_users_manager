@@ -12,8 +12,8 @@ rtUsers.get('/list',(req,res)=>{
         .then(users=>res.json(users))
 })
 
-rtUsers.get('/get',(req,res)=>{
-    daoUsers.findByEmail(req.params.email)
+rtUsers.get('/get',(req,res)=>{ //?email='e@mail.com'
+    daoUsers.findByEmail(req.query.email)
         .then(user=>res.json(user))
 })
 

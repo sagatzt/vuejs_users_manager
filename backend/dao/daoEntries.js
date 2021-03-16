@@ -1,12 +1,24 @@
-const User = require('../models/User')
-const Entrie = require('../models/Entry')
+const Entry = require('../models/Entry')
 
-const daoUsers={}
+const daoEntries={}
 
 //funcion para guardar una entrada
-daoUsers.guardarEntrada = function guardarEntrada(entrie){
-    let newEntrie = new User(entrie)
-    newEntrie.save()
+daoEntries.save = (entry)=>{
+    return new Promise((resolved)=>{
+        let newEntry = new Entry(entry)
+        newEntry.save()
+            .then(entry=>resolved(entry))
+    })
+
+}
+//listar todas las entradas
+daoEntries.list =()=>{
+    return new Promise((resolved)=>{
+        Entry.find()
+            .then(entries=>resolved(entries))
+    })
 }
 
-module.exports=daoUsers
+//falta crear: buscar entrada por ID findById(id)
+
+module.exports=daoEntries

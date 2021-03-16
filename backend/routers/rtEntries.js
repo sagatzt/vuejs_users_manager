@@ -4,7 +4,7 @@ const daoEntries = require('../dao/daoEntries')
 
 rtEntries.post('/save',(req,res)=>{
     daoEntries.save(req.body)
-    res.json({res: 'ok'})
+        .then(entry=>res.json(entry))
 })
 
 rtEntries.get('/get/:id',(req,res)=>{

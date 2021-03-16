@@ -4,8 +4,12 @@ const daoUsers={}
 
 //función para guardar un usuario
 daoUsers.signup = (user)=>{
-    let newUser = new User(user)
-    newUser.save()
+    return new Promise((resolved)=>{
+        let newUser = new User(user)
+        newUser.save().then(user=>{
+            resolved(user)
+        })    
+    })
 }
 
 //función para listar usurios
@@ -20,8 +24,8 @@ daoUsers.list =()=>{
 //buscar usuario por e-mail
 daoUsers.findByEmail=(email)=>{
     return new Promise((resolved) =>{
-            User.findOne({ email: email })
-            then(user => resolved(user))
+        User.findOne({ email: email })
+            .then(user => resolved(user))
         })
 }
 

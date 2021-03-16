@@ -24,7 +24,11 @@ rtUsers.post('/delete/:id',(req,res)=>{
 
 rtUsers.post('/signin',(req,res)=>{
     daoUsers.signin(req.body.email,req.body.password)
-        .then(data=>res.json(data))
+        .then(data=>{
+            req.session.userId=data._id
+            console.log("usuario autenticado: ", req.session)
+            res.json(data)
+        })
 })
 
 

@@ -11,7 +11,7 @@ const routes = [
     path: '/users',
     name: 'Users',
     component: function () {
-      return import('../views/UsersManager.vue')
+      return import('../views/UsersView.vue')
     }
   }
 

@@ -1,4 +1,4 @@
-# vuejs_prueba1
+# vuejs_nodejs_mongodb
 
 ## Project setup
 ```

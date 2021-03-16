@@ -6,6 +6,13 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: function () {
+      return import('../views/UsersManager.vue')
+    }
   }
 
 ]

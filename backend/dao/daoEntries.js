@@ -19,6 +19,18 @@ daoEntries.list =()=>{
     })
 }
 
-//falta crear: buscar entrada por ID findById(id)
+//listar todas las entradas
+daoEntries.findById =(id)=>{
+    return new Promise((resolved)=>{
+        Entry.findOne({_id:id})
+            .then(entry=>resolved(entry))
+    })
+}
+
+
+////////////////////////////////////////////////////////
+////////////// COMMENTS ////////////////////////////////
+
+
 
 module.exports=daoEntries

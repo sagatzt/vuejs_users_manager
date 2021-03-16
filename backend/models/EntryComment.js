@@ -2,8 +2,8 @@ const mongoose = require("mongoose")
 const {Schema} = mongoose
 
 const schemaEntryCooment = new Schema({
-    valoration: {type:Number,default:5},
-    text: {type:String,default:""},
+    rating: {type:Number,default:5},
+    message: {type:String,default:""},
     
 })
 

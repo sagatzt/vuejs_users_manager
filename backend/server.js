@@ -4,9 +4,16 @@ var session = require('express-session')
 const rtMain = require('./routers/rtMain')
 
 //base de datos
-const conexion = require('./conexion')
+const conexion = require('./mongodb')
 conexion.on('error',console.error.bind(console,"Error de conexion mongo"))
 conexion.once('open',()=>console.log("Conexión mongo OK!!"))
+
+//gestión de sesiones
+app.use(session({ 
+    secret: 'miclavesecreta',
+    resave: false,
+    saveUninitialized: true
+}))
 
 //middlewares
 app.use(express.json())
@@ -17,6 +24,7 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE')    
     next()
 })
+
 //enrutadores
 app.use('/api',rtMain)
 

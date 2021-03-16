@@ -1,7 +1,7 @@
 <template>
   <div class="prueba">
       <div class="formulario">
-        <h1>API Backend</h1>
+        <h1>UsersManager</h1>
             <div>Nombre: <input v-model="nombre"></div>
             <div>Apellidos: <input v-model="apellidos"></div>
             <div>Email: <input v-model="email"></div>
@@ -29,7 +29,7 @@ import PasswordHide from '@/components/PasswordHide'
 import { ref, reactive, computed, onMounted } from 'vue'
         
 export default {
-    name:'ApiBackend',
+    name:'UsersManager',
     components:{
         PasswordHide
     },

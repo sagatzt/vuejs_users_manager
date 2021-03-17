@@ -1,4 +1,5 @@
 const Entry = require('../models/Entry')
+const EntryComment = require('../models/EntryComment')
 
 const daoEntries={}
 
@@ -14,11 +15,33 @@ daoEntries.save = (entry)=>{
 //listar todas las entradas
 daoEntries.list =()=>{
     return new Promise((resolved)=>{
-        Entry.find()
+        Entry.find().populate('author').populate('comments')
             .then(entries=>resolved(entries))
     })
 }
 
-//falta crear: buscar entrada por ID findById(id)
+//listar una entrada por ID
+daoEntries.findById =(id)=>{
+    return new Promise((resolved)=>{
+        Entry.findOne({_id:id})
+            .then(entry=>resolved(entry))
+    })
+}
+
+
+////////////////////////////////////////////////////////
+////////////// COMMENTS ////////////////////////////////
+
+daoEntries.addComment = (comment)=>{
+    return new Promise((resolved)=>{
+        let newComment = new EntryComment(comment)
+        newComment.save().then(com=>{
+            Entry.findOneAndUpdate({_id:com.entry},{'$push':
+            {'comments':com}}).then(entry=>{
+                resolved(com)
+            })
+        })
+    })
+}
 
 module.exports=daoEntries

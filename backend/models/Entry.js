@@ -2,11 +2,12 @@ const mongoose = require("mongoose")
 const {Schema} = mongoose
 
 const schemaEntry = new Schema({
-    title: {type:String,default:""},
-    text: {type:String,default:""},
-    img: {type:String,default:"/images/default.png"},
+    title: {type:String},
+    text: {type:String},
+    imgs: [{type:String}],
     date: {type:Date, default: new Date()},
-    
+    author: {type:Schema.Types.ObjectId,ref:'user'},
+    comments:[{type:Schema.Types.ObjectId,ref:'entryComment'}]
 })
 
 class Entry{
@@ -15,6 +16,7 @@ class Entry{
     //privados
 
 }
+
 
 //plugins
 schemaEntry.loadClass(Entry)

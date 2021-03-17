@@ -4,7 +4,7 @@ mongoose.connect('mongodb://', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify:false,
+  useFindAndModify:false
 })
 
 module.exports=mongoose.connection

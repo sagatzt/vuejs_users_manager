@@ -1,6 +1,7 @@
 const express = require('express')
 const rtEntries = express.Router()
 const daoEntries = require('../dao/daoEntries')
+const { user } = require('../mongodb')
 
 rtEntries.post('/save',(req,res)=>{
     daoEntries.save(req.body)
@@ -22,6 +23,15 @@ rtEntries.post('/delete/:id',(req,res)=>{
     res.json({res: 'ok'})
 })
 
+///////////////////////////////////////////////
+
+rtEntries.post('/addComment',(req,res)=>{
+    if(req.session.user){
+        req.body.author=req.session.user
+        daoEntries.addComment(req.body)
+            .then(comment=>res.json(comment))
+    }else res.json({res:'No autorizado'})
+})
 
 
 module.exports= rtEntries

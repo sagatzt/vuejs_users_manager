@@ -6,6 +6,8 @@ const schemaEntry = new Schema({
     text: {type:String},
     imgs: [{type:String}],
     date: {type:Date, default: new Date()},
+    author: {type:Schema.Types.ObjectId,ref:'user'},
+    comments:[{type:Schema.Types.ObjectId,ref:'entryComment'}]
 })
 
 class Entry{

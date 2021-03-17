@@ -3,8 +3,13 @@ const rtEntries = express.Router()
 const daoEntries = require('../dao/daoEntries')
 
 rtEntries.post('/save',(req,res)=>{
-    daoEntries.save(req.body)
-        .then(entry=>res.json(entry))
+    console.log(req.session)
+    if(req.session.userId){
+
+        req.body.author=req.session.userId
+        daoEntries.save(req.body)
+            .then(entry=>res.json(entry))
+    }else res.json({res:'no autorizado'})
 })
 
 rtEntries.get('/get/:id',(req,res)=>{
@@ -17,10 +22,17 @@ rtEntries.get('/list',(req,res)=>{
         .then(entries=>res.json(entries))
 })
 
-rtEntries.post('/delete/:id',(req,res)=>{
+rtEntries.delete('/delete/:id',(req,res)=>{
     daoEntries.delete(req.params.id)
-    res.json({res: 'ok'})
+        .then(entry=>res.json(entry))
 })
+
+////////////////////////////////////
+rtEntries.post('/saveComment',(req,res)=>{
+    daoEntries.saveComment(req.body)
+        .then(entry=>res.json(entry))
+})
+
 
 
 

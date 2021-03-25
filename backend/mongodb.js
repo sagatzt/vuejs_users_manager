@@ -1,6 +1,14 @@
 const mongoose = require('mongoose')
  
-mongoose.connect('mongodb://profe:pass1234@3.10.117.25:27017/profedb', {
+let data={
+  host=process.env.DB_HOST,
+  user=process.env.DB_USER,
+  pass=process.env.DB_PASS,
+  port=process.env.DB_PORT,
+  name=process.env.DB_NAME
+}
+
+mongoose.connect(`mongodb://${data.user}:${data.pass}@${data.host}:${data.port}/${data.name}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

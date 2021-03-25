@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 var session = require('express-session')
@@ -12,7 +13,7 @@ conexion.once('open',()=>console.log("Conexión mongo OK!!"))
 
 //gestión de sesiones
 app.use(session({ 
-    secret: 'miclavesecreta',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
